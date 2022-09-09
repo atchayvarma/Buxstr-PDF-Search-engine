@@ -17,7 +17,10 @@ export default {
     ]
   },
 
-
+  privateRuntimeConfig: {
+    apiSecret: process.env.API_SECRET,
+    cx: process.env.CX
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

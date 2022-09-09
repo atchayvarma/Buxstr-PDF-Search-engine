@@ -22,23 +22,15 @@
 export default {
   name: "_search",
 
-  data(){
-    return{
-      results:[],
-    }
-  },
-  async fetch(){
-    this.results = await fetch(
-      `https://customsearch.googleapis.com/customsearch/v1?cx=f5283cd8111bc4a85&safe=active&key=AIzaSyBUuT-Epnmmne1tt1PcFwEVkE2rid7-LNQ&hq=filetype:pdf&fileType=pdf&q=${this.query}`
+
+  async asyncData({ $config:{ cx,apiSecret },params }) {
+    const query = params.search
+
+    const results = await fetch(
+      `https://customsearch.googleapis.com/customsearch/v1?cx=${cx}&safe=active&key=${apiSecret}&hq=filetype:pdf&fileType=pdf&q=${query}`
     ).then(res => res.json())
-  },
-  async asyncData({ params }) {
-    const query = params.search // When calling /abc the slug will be "abc"
-    return { query }
+    return { query, results }
   }
 }
 </script>
 
-<style scoped>
-
-</style>
